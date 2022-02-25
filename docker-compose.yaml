@@ -1,0 +1,24 @@
+services:
+  kong_database:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=github_scraper
+      - POSTGRES_DB=github_scraper
+      - POSTGRES_PASSWORD=abc123!@#
+    ports:
+      - 5432:5432
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+  rest:
+    image: quarkus/quarkus-kotlin-rest-api-jvm
+    build:
+      context: .
+      dockerfile: ./src/main/docker/Dockerfile.jvm
+    ports:
+      - 8080:8080
+    volumes:
+      - ./target/quarkus-app:/deployments
+
+volumes:
+  postgres_data:
+    driver: local
