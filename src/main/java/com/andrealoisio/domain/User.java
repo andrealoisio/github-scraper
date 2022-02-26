@@ -19,8 +19,8 @@ public class User {
     private String createdAt;
     
     private Object email;
-    @JsonProperty("events_url")
-    private String eventsUrl;
+//    @JsonProperty("events_url")
+//    private String eventsUrl;
     
     private Long followers;
     @JsonProperty("followers_url")
@@ -53,8 +53,8 @@ public class User {
     private Long publicGists;
     @JsonProperty("public_repos")
     private Long publicRepos;
-    @JsonProperty("received_events_url")
-    private String receivedEventsUrl;
+//    @JsonProperty("received_events_url")
+//    private String receivedEventsUrl;
     @JsonProperty("repos_url")
     private String reposUrl;
     @JsonProperty("site_admin")
@@ -120,13 +120,13 @@ public class User {
         this.email = email;
     }
 
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public void setEventsUrl(String eventsUrl) {
-        this.eventsUrl = eventsUrl;
-    }
+//    public String getEventsUrl() {
+//        return eventsUrl;
+//    }
+//
+//    public void setEventsUrl(String eventsUrl) {
+//        this.eventsUrl = eventsUrl;
+//    }
 
     public Long getFollowers() {
         return followers;
@@ -256,13 +256,13 @@ public class User {
         this.publicRepos = publicRepos;
     }
 
-    public String getReceivedEventsUrl() {
-        return receivedEventsUrl;
-    }
-
-    public void setReceivedEventsUrl(String receivedEventsUrl) {
-        this.receivedEventsUrl = receivedEventsUrl;
-    }
+//    public String getReceivedEventsUrl() {
+//        return receivedEventsUrl;
+//    }
+//
+//    public void setReceivedEventsUrl(String receivedEventsUrl) {
+//        this.receivedEventsUrl = receivedEventsUrl;
+//    }
 
     public String getReposUrl() {
         return reposUrl;
