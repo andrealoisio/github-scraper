@@ -5,4 +5,45 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.7.xsd">
 
+    <changeSet author="mendes" id="1">
+        <createTable tableName="users">
+            <column name="ID" type="int8">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="AVATAR_URL" type="VARCHAR(255)"/>
+            <column name="BIO" type="VARCHAR(255)"/>
+            <column name="COMPANY" type="VARCHAR(255)"/>
+            <column name="CREATED_AT" type="VARCHAR(255)"/>
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column name="BLOG" type="VARCHAR(255)"/>
+            <column name="FOLLOWERS" type="int8" />
+            <column name="FOLLOWING" type="int8" />
+            <column name="GRAVATAR_ID" type="VARCHAR(255)" />
+            <column name="HIREABLE" type="VARCHAR(255)" />
+            <column name="HTML_URL" type="VARCHAR(255)" />
+            <column name="LOCATION" type="VARCHAR(255)" />
+            <column name="LOGIN" type="VARCHAR(255)" />
+            <column name="NAME" type="VARCHAR(255)" />
+            <column name="NODE_ID" type="VARCHAR(255)" />
+            <column name="PUBLIC_GISTS" type="int8" />
+            <column name="PUBLIC_REPOS" type="int8" />
+            <column name="SITE_ADMIN" type="boolean" />
+            <column name="TWITTER_USERNAME" type="VARCHAR(255)" />
+            <column name="TYPE" type="VARCHAR(255)" />
+            <column name="UPDATED_AT" type="VARCHAR(255)" />
+            <column name="URL" type="VARCHAR(255)" />
+            <column name="USER_ID" type="int8" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="mendes">
+        <createIndex tableName="users" indexName="idx_user_id" unique="true">
+            <column name="user_id"></column>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="3" author="mendes">
+        <createSequence sequenceName="sq_user" />
+    </changeSet>
+
 </databaseChangeLog>

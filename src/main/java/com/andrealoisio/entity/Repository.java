@@ -4,6 +4,7 @@ package com.andrealoisio.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "repositories")
 public class Repository {
 
     @Id
@@ -19,6 +20,7 @@ public class Repository {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "html_url")
     private String htmlUrl;
 
     @Column(name = "repository_id")

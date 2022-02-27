@@ -1,5 +1,6 @@
 package com.andrealoisio.services.restclients;
 
+import com.andrealoisio.jsonobjects.UserJson;
 import com.andrealoisio.services.RestClientHeaderFactory;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -15,10 +16,10 @@ public interface UserRestClient {
 
     @GET
     @Path("/andrealoisio")
-    User getUser();
+    UserJson getUser();
 
     @GET
     @Path("/{username}")
-    User getUserByUsername(@PathParam String username);
+    UserJson getUserByUsername(@PathParam String username);
 
 }

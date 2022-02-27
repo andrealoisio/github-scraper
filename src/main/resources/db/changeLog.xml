@@ -7,15 +7,6 @@
     http://www.liquibase.org/xml/ns/dbchangelog
     https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-    <changeSet author="mendes" id="1">
-        <createTable tableName="repositories">
-            <column name="ID" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="NAME" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-
     <changeSet author="mendes" id="2">
         <createTable tableName="scraper_info">
             <column name="id" type="int8">
@@ -25,5 +16,8 @@
             <column name="last_stored_id" type="int8" />
         </createTable>
     </changeSet>
+
+    <include file="db/repositories.xml" />
+    <include file="db/users.xml" />
 
 </databaseChangeLog>

@@ -5,4 +5,32 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.7.xsd">
 
+    <changeSet author="mendes" id="1">
+        <createTable tableName="repositories">
+            <column name="ID" type="int8">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="FORK" type="boolean"/>
+            <column name="FULL_NAME" type="VARCHAR(255)"/>
+            <column name="HTML_URL" type="VARCHAR(255)"/>
+            <column name="IS_PRIVATE" type="boolean"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="NODE_ID" type="VARCHAR(255)"/>
+            <column name="REPOSITORY_ID" type="INT8"/>
+            <column name="URL" type="VARCHAR(255)"/>
+            <column name="USER_ID" type="INT8"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="mendes">
+        <createIndex tableName="repositories" indexName="idx_repository_id" unique="true">
+            <column name="repository_id"></column>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="3" author="mendes">
+        <createSequence sequenceName="sq_repository" />
+    </changeSet>
+
 </databaseChangeLog>

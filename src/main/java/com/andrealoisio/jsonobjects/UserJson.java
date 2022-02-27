@@ -1,6 +1,7 @@
 
 package com.andrealoisio.jsonobjects;
 
+import com.andrealoisio.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserJson {
@@ -8,15 +9,15 @@ public class UserJson {
     @JsonProperty("avatar_url")
     private String avatarUrl;
 
-    private Object bio;
+    private String bio;
 
     private String blog;
 
-    private Object company;
+    private String company;
     @JsonProperty("created_at")
     private String createdAt;
 
-    private Object email;
+    private String email;
     @JsonProperty("events_url")
     private String eventsUrl;
 
@@ -32,13 +33,13 @@ public class UserJson {
     @JsonProperty("gravatar_id")
     private String gravatarId;
 
-    private Object hireable;
+    private String hireable;
     @JsonProperty("html_url")
     private String htmlUrl;
 
     private Long id;
 
-    private Object location;
+    private String location;
 
     private String login;
 
@@ -62,13 +63,44 @@ public class UserJson {
     @JsonProperty("subscriptions_url")
     private String subscriptionsUrl;
     @JsonProperty("twitter_username")
-    private Object twitterUsername;
+    private String twitterUsername;
 
     private String type;
     @JsonProperty("updated_at")
     private String updatedAt;
 
     private String url;
+
+
+    public User toEntity() {
+        var user = new User();
+        user.setUserId(this.id);
+
+        user.setAvatarUrl(this.avatarUrl);
+        user.setBio(this.bio);
+        user.setBlog(this.blog);
+        user.setCompany(this.company);
+        user.setCreatedAt(this.createdAt);
+        user.setEmail(this.email);
+        user.setFollowers(this.followers);
+        user.setFollowing(this.following);
+        user.setGravatarId(this.gravatarId);
+        user.setHireable(this.hireable);
+        user.setHtmlUrl(this.htmlUrl);
+        user.setLocation(this.location);
+        user.setLogin(this.login);
+        user.setName(this.name);
+        user.setNodeId(this.nodeId);
+        user.setPublicGists(this.publicGists);
+        user.setPublicRepos(this.publicRepos);
+        user.setSiteAdmin(this.siteAdmin);
+        user.setTwitterUsername(this.twitterUsername);
+        user.setType(this.type);
+        user.setUpdatedAt(this.updatedAt);
+        user.setUrl(this.url);
+        return user;
+    }
+
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -78,11 +110,11 @@ public class UserJson {
         this.avatarUrl = avatarUrl;
     }
 
-    public Object getBio() {
+    public String getBio() {
         return bio;
     }
 
-    public void setBio(Object bio) {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
@@ -94,11 +126,11 @@ public class UserJson {
         this.blog = blog;
     }
 
-    public Object getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setCompany(Object company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 
@@ -110,11 +142,11 @@ public class UserJson {
         this.createdAt = createdAt;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -174,11 +206,11 @@ public class UserJson {
         this.gravatarId = gravatarId;
     }
 
-    public Object getHireable() {
+    public String getHireable() {
         return hireable;
     }
 
-    public void setHireable(Object hireable) {
+    public void setHireable(String hireable) {
         this.hireable = hireable;
     }
 
@@ -198,11 +230,11 @@ public class UserJson {
         this.id = id;
     }
 
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -294,11 +326,11 @@ public class UserJson {
         this.subscriptionsUrl = subscriptionsUrl;
     }
 
-    public Object getTwitterUsername() {
+    public String getTwitterUsername() {
         return twitterUsername;
     }
 
-    public void setTwitterUsername(Object twitterUsername) {
+    public void setTwitterUsername(String twitterUsername) {
         this.twitterUsername = twitterUsername;
     }
 

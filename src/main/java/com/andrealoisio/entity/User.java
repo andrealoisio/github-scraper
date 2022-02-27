@@ -2,9 +2,12 @@
 package com.andrealoisio.entity;
 
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,16 +19,16 @@ public class User {
     @Column(name = "avatar_url")
     private String avatarUrl;
     
-    private Object bio;
+    private String bio;
     
     private String blog;
     
-    private Object company;
+    private String company;
 
     @Column(name = "created_at")
     private String createdAt;
     
-    private Object email;
+    private String email;
     
     private Long followers;
     
@@ -34,7 +37,7 @@ public class User {
     @Column(name = "gravatar_id")
     private String gravatarId;
     
-    private Object hireable;
+    private String hireable;
 
     @Column(name = "html_url")
     private String htmlUrl;
@@ -42,7 +45,7 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
     
-    private Object location;
+    private String location;
     
     private String login;
     
@@ -61,7 +64,7 @@ public class User {
     private Boolean siteAdmin;
 
     @Column(name = "twitter_username")
-    private Object twitterUsername;
+    private String twitterUsername;
     
     private String type;
 
@@ -86,11 +89,11 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public Object getBio() {
+    public String getBio() {
         return bio;
     }
 
-    public void setBio(Object bio) {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
@@ -102,11 +105,11 @@ public class User {
         this.blog = blog;
     }
 
-    public Object getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setCompany(Object company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 
@@ -118,11 +121,11 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -150,11 +153,11 @@ public class User {
         this.gravatarId = gravatarId;
     }
 
-    public Object getHireable() {
+    public String getHireable() {
         return hireable;
     }
 
-    public void setHireable(Object hireable) {
+    public void setHireable(String hireable) {
         this.hireable = hireable;
     }
 
@@ -174,11 +177,11 @@ public class User {
         this.userId = userId;
     }
 
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -230,11 +233,11 @@ public class User {
         this.siteAdmin = siteAdmin;
     }
 
-    public Object getTwitterUsername() {
+    public String getTwitterUsername() {
         return twitterUsername;
     }
 
-    public void setTwitterUsername(Object twitterUsername) {
+    public void setTwitterUsername(String twitterUsername) {
         this.twitterUsername = twitterUsername;
     }
 

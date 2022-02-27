@@ -1,5 +1,6 @@
 package com.andrealoisio.services;
 
+import com.andrealoisio.jsonobjects.UserJson;
 import com.andrealoisio.services.restclients.UserRestClient;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -17,13 +18,13 @@ class UserRestClientTest {
 
     @Test
     void testGetUser() {
-        User user = userRestClient.getUser();
+        UserJson user = userRestClient.getUser();
         assert true;
     }
 
     @Test
     void testGetUserByUsername() {
-        User user = userRestClient.getUserByUsername("andrealoisio");
+        UserJson user = userRestClient.getUserByUsername("andrealoisio");
         System.out.println(user);
         Assertions.assertNotNull(user);
     }
