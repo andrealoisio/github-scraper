@@ -3,6 +3,7 @@ package com.andrealoisio.jsonobjects;
 
 import javax.annotation.Generated;
 
+import com.andrealoisio.entity.Repository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RepositoryJson {
@@ -100,6 +101,21 @@ public class RepositoryJson {
     private String treesUrl;
 
     private String url;
+
+    public Repository toEntity() {
+        var repository = new Repository();
+        repository.setRepositoryIdId(this.id);
+        repository.setDescription(this.description);
+        repository.setFork(this.fork);
+        repository.setFullName(this.fullName);
+        repository.setHtmlUrl(this.htmlUrl);
+        repository.setName(this.name);
+        repository.setNodeId(this.nodeId);
+        repository.setIsPrivate(this.isPrivate);
+        repository.setUrl(this.url);
+        repository.setUserId(this.owner.getId());
+        return repository;
+    }
 
     public String getArchiveUrl() {
         return archiveUrl;
