@@ -1,14 +1,12 @@
-package com.andrealoisio.service;
+package com.andrealoisio.services;
 
-import com.andrealoisio.domain.User;
+import com.andrealoisio.services.restclients.UserRestClient;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 class UserRestClientTest {

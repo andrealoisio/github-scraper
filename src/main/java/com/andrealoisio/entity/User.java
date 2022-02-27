@@ -1,13 +1,19 @@
 
-package com.andrealoisio.domain;
+package com.andrealoisio.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Generated;
+import javax.persistence.*;
 
+@Entity
 public class User {
 
-    @JsonProperty("avatar_url")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeq")
+    @SequenceGenerator(name = "userSeq", sequenceName = "sq_user", allocationSize = 1)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "avatar_url")
     private String avatarUrl;
     
     private Object bio;
@@ -15,62 +21,62 @@ public class User {
     private String blog;
     
     private Object company;
-    @JsonProperty("created_at")
+
+    @Column(name = "created_at")
     private String createdAt;
     
     private Object email;
-//    @JsonProperty("events_url")
-//    private String eventsUrl;
     
     private Long followers;
-    @JsonProperty("followers_url")
-    private String followersUrl;
     
     private Long following;
-    @JsonProperty("following_url")
-    private String followingUrl;
-    @JsonProperty("gists_url")
-    private String gistsUrl;
-    @JsonProperty("gravatar_id")
+
+    @Column(name = "gravatar_id")
     private String gravatarId;
     
     private Object hireable;
-    @JsonProperty("html_url")
+
+    @Column(name = "html_url")
     private String htmlUrl;
-    
-    private Long id;
+
+    @Column(name = "user_id")
+    private Long userId;
     
     private Object location;
     
     private String login;
     
     private String name;
-    @JsonProperty("node_id")
+
+    @Column(name = "node_id")
     private String nodeId;
-    @JsonProperty("organizations_url")
-    private String organizationsUrl;
-    @JsonProperty("public_gists")
+
+    @Column(name = "public_gists")
     private Long publicGists;
-    @JsonProperty("public_repos")
+
+    @Column(name = "public_repos")
     private Long publicRepos;
-//    @JsonProperty("received_events_url")
-//    private String receivedEventsUrl;
-    @JsonProperty("repos_url")
-    private String reposUrl;
-    @JsonProperty("site_admin")
+
+    @Column(name = "site_admin")
     private Boolean siteAdmin;
-    @JsonProperty("starred_url")
-    private String starredUrl;
-    @JsonProperty("subscriptions_url")
-    private String subscriptionsUrl;
-    @JsonProperty("twitter_username")
+
+    @Column(name = "twitter_username")
     private Object twitterUsername;
     
     private String type;
-    @JsonProperty("updated_at")
+
+    @Column(name = "updated_at")
     private String updatedAt;
     
     private String url;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAvatarUrl() {
         return avatarUrl;
@@ -120,14 +126,6 @@ public class User {
         this.email = email;
     }
 
-//    public String getEventsUrl() {
-//        return eventsUrl;
-//    }
-//
-//    public void setEventsUrl(String eventsUrl) {
-//        this.eventsUrl = eventsUrl;
-//    }
-
     public Long getFollowers() {
         return followers;
     }
@@ -136,36 +134,12 @@ public class User {
         this.followers = followers;
     }
 
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public void setFollowersUrl(String followersUrl) {
-        this.followersUrl = followersUrl;
-    }
-
     public Long getFollowing() {
         return following;
     }
 
     public void setFollowing(Long following) {
         this.following = following;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public void setFollowingUrl(String followingUrl) {
-        this.followingUrl = followingUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public void setGistsUrl(String gistsUrl) {
-        this.gistsUrl = gistsUrl;
     }
 
     public String getGravatarId() {
@@ -192,12 +166,12 @@ public class User {
         this.htmlUrl = htmlUrl;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Object getLocation() {
@@ -232,14 +206,6 @@ public class User {
         this.nodeId = nodeId;
     }
 
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public void setOrganizationsUrl(String organizationsUrl) {
-        this.organizationsUrl = organizationsUrl;
-    }
-
     public Long getPublicGists() {
         return publicGists;
     }
@@ -256,44 +222,12 @@ public class User {
         this.publicRepos = publicRepos;
     }
 
-//    public String getReceivedEventsUrl() {
-//        return receivedEventsUrl;
-//    }
-//
-//    public void setReceivedEventsUrl(String receivedEventsUrl) {
-//        this.receivedEventsUrl = receivedEventsUrl;
-//    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public void setReposUrl(String reposUrl) {
-        this.reposUrl = reposUrl;
-    }
-
     public Boolean getSiteAdmin() {
         return siteAdmin;
     }
 
     public void setSiteAdmin(Boolean siteAdmin) {
         this.siteAdmin = siteAdmin;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public void setStarredUrl(String starredUrl) {
-        this.starredUrl = starredUrl;
-    }
-
-    public String getSubscriptionsUrl() {
-        return subscriptionsUrl;
-    }
-
-    public void setSubscriptionsUrl(String subscriptionsUrl) {
-        this.subscriptionsUrl = subscriptionsUrl;
     }
 
     public Object getTwitterUsername() {

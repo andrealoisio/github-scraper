@@ -1,4 +1,4 @@
-package com.andrealoisio.service;
+package com.andrealoisio.services;
 
 import javax.enterprise.context.ApplicationScoped;
 
