@@ -17,7 +17,6 @@ import java.util.List;
 @RegisterClientHeaders(RestClientHeaderFactory.class)
 public interface RepositoryRestClient {
 
-    // https://api.github.com/repositories?since=461309262
     @GET
     List<RepositoryJson> getRepositoriesSince(@QueryParam() Long since);
 

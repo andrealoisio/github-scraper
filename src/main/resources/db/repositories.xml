@@ -10,15 +10,15 @@
             <column name="ID" type="int8">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="HTML_URL" type="VARCHAR(255)"/>
+            <column name="URL" type="VARCHAR(255)"/>
             <column name="DESCRIPTION" type="TEXT"/>
             <column name="FORK" type="boolean"/>
             <column name="FULL_NAME" type="VARCHAR(255)"/>
-            <column name="HTML_URL" type="VARCHAR(255)"/>
             <column name="IS_PRIVATE" type="boolean"/>
-            <column name="NAME" type="VARCHAR(255)"/>
             <column name="NODE_ID" type="VARCHAR(255)"/>
             <column name="REPOSITORY_ID" type="INT8"/>
-            <column name="URL" type="VARCHAR(255)"/>
             <column name="USER_ID" type="INT8"/>
         </createTable>
     </changeSet>

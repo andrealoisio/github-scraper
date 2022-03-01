@@ -1,9 +1,11 @@
 package com.andrealoisio.services;
 
 import com.andrealoisio.entity.Repository;
+import com.andrealoisio.entity.User;
 import com.andrealoisio.jsonobjects.RepositoryJson;
 import com.andrealoisio.repositories.RepositoryRepository;
 import com.andrealoisio.repositories.ScraperInfoRepository;
+import com.andrealoisio.repositories.UserRepository;
 import com.andrealoisio.services.restclients.RepositoryRestClient;
 import com.google.common.collect.Lists;
 import io.quarkus.logging.Log;
@@ -26,6 +28,9 @@ public class ScrapeService {
     RepositoryRepository repositoryRepository;
 
     @Inject
+    UserRepository userRepository;
+
+    @Inject
     ScraperInfoRepository scraperInfoRepository;
 
     @ConfigProperty(name = "scraper.repository.repos-to-persist")
@@ -39,11 +44,9 @@ public class ScrapeService {
 
         var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
 
-        var entityRepositoryList = repositoryList.stream().map(RepositoryJson::toEntity).collect(Collectors.toList());
+        var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
-        var chunks = Lists.partition(entityRepositoryList, numberOfReposToPersist);
-
-        for (List<Repository> chunk : chunks) {
+        for (List<RepositoryJson> chunk : chunks) {
             persistChunk(chunk);
         }
 
@@ -51,12 +54,39 @@ public class ScrapeService {
     }
 
     @Transactional
-    void persistChunk(List<Repository> repositoryList) {
-        repositoryRepository.persist(repositoryList);
-        var lastRepo = repositoryList.get(repositoryList.size() - 1);
+    void persistChunk(List<RepositoryJson> repositoryList) {
+
+        var users = getUsersEntities(repositoryList);
+        userRepository.persist(getNonExistingUsers(users));
+
+        var repositories = getRepositoriesEntities(repositoryList);
+        repositoryRepository.persist(repositories);
+
+        var lastRepo = repositories.get(repositories.size() - 1);
         var scraperInfo = scraperInfoRepository.findById(1l);
+
         scraperInfo.setLastRepoId(lastRepo.getRepositoryIdId());
         scraperInfoRepository.persist(scraperInfo);
+    }
+
+    private List<Repository> getRepositoriesEntities(List<RepositoryJson> jsonRepositories) {
+        return jsonRepositories.stream().map(RepositoryJson::toEntity).collect(Collectors.toList());
+    }
+
+    private List<User> getUsersEntities(List<RepositoryJson> jsonRepositories) {
+        return jsonRepositories.stream().map(item -> item.getOwner().toEntity()).collect(Collectors.toList());
+    }
+
+    private List<Long> getUsersIds(List<User> users) {
+        return users.stream().map(User::getUserId).collect(Collectors.toList());
+    }
+
+    private List<User> getNonExistingUsers(List<User> users) {
+        var existingUserIds = userRepository.findByUserId(getUsersIds(users))
+                .stream()
+                .map(User::getUserId)
+                .collect(Collectors.toList());
+        return users.stream().filter(user -> !existingUserIds.contains(user.getUserId())).collect(Collectors.toList());
     }
 
     private Long getRepositoryStartId() {

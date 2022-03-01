@@ -10,20 +10,21 @@
             <column name="ID" type="int8">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="USER_ID" type="int8" />
+            <column name="LOGIN" type="VARCHAR(255)" />
+            <column name="NAME" type="VARCHAR(255)" />
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column name="HTML_URL" type="VARCHAR(255)" />
             <column name="AVATAR_URL" type="VARCHAR(255)"/>
             <column name="BIO" type="VARCHAR(255)"/>
             <column name="COMPANY" type="VARCHAR(255)"/>
             <column name="CREATED_AT" type="VARCHAR(255)"/>
-            <column name="EMAIL" type="VARCHAR(255)"/>
             <column name="BLOG" type="VARCHAR(255)"/>
             <column name="FOLLOWERS" type="int8" />
             <column name="FOLLOWING" type="int8" />
             <column name="GRAVATAR_ID" type="VARCHAR(255)" />
             <column name="HIREABLE" type="VARCHAR(255)" />
-            <column name="HTML_URL" type="VARCHAR(255)" />
             <column name="LOCATION" type="VARCHAR(255)" />
-            <column name="LOGIN" type="VARCHAR(255)" />
-            <column name="NAME" type="VARCHAR(255)" />
             <column name="NODE_ID" type="VARCHAR(255)" />
             <column name="PUBLIC_GISTS" type="int8" />
             <column name="PUBLIC_REPOS" type="int8" />
@@ -32,7 +33,6 @@
             <column name="TYPE" type="VARCHAR(255)" />
             <column name="UPDATED_AT" type="VARCHAR(255)" />
             <column name="URL" type="VARCHAR(255)" />
-            <column name="USER_ID" type="int8" />
         </createTable>
     </changeSet>
 
