@@ -10,7 +10,7 @@
             <column name="ID" type="int8">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="DESCRIPTION" type="TEXT"/>
             <column name="FORK" type="boolean"/>
             <column name="FULL_NAME" type="VARCHAR(255)"/>
             <column name="HTML_URL" type="VARCHAR(255)"/>

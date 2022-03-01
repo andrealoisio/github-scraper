@@ -1,22 +1,18 @@
 package com.andrealoisio.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "scraper_info")
 public class ScraperInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String type;
-
-    @Column(name = "last_stored_id")
-    private Long lastStoredId;
+    @Column(name = "last_repo_id")
+    private Long lastRepoId;
 
     public Long getId() {
         return id;
@@ -26,19 +22,11 @@ public class ScraperInfo {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public Long getLastRepoId() {
+        return lastRepoId;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getLastStoredId() {
-        return lastStoredId;
-    }
-
-    public void setLastStoredId(Long lastStoredId) {
-        this.lastStoredId = lastStoredId;
+    public void setLastRepoId(Long lastRepoId) {
+        this.lastRepoId = lastRepoId;
     }
 }

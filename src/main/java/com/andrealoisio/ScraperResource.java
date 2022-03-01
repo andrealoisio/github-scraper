@@ -16,7 +16,7 @@ public class ScraperResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String pong() {
+    public String startScrape() {
         scrapeService.scrape();
         return "OK";
     }

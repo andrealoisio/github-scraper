@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.7.xsd">
+
+    <changeSet author="mendes" id="1">
+        <createTable tableName="scraper_info">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="last_repo_id" type="int8" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="mendes">
+        <insert tableName="scraper_info">
+            <column name="id" value="1" />
+            <column name="last_repo_id" value="0" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

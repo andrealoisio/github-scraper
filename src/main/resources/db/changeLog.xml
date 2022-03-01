@@ -7,16 +7,8 @@
     http://www.liquibase.org/xml/ns/dbchangelog
     https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-    <changeSet author="mendes" id="2">
-        <createTable tableName="scraper_info">
-            <column name="id" type="int8">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="type" type="VARCHAR(255)"/>
-            <column name="last_stored_id" type="int8" />
-        </createTable>
-    </changeSet>
 
+    <include file="db/scraperInfo.xml" />
     <include file="db/repositories.xml" />
     <include file="db/users.xml" />
 

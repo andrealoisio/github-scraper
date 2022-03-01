@@ -3,8 +3,11 @@ package com.andrealoisio.services;
 import com.andrealoisio.entity.Repository;
 import com.andrealoisio.jsonobjects.RepositoryJson;
 import com.andrealoisio.repositories.RepositoryRepository;
+import com.andrealoisio.repositories.ScraperInfoRepository;
 import com.andrealoisio.services.restclients.RepositoryRestClient;
+import com.google.common.collect.Lists;
 import io.quarkus.logging.Log;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -22,19 +25,46 @@ public class ScrapeService {
     @Inject
     RepositoryRepository repositoryRepository;
 
-    @Transactional
+    @Inject
+    ScraperInfoRepository scraperInfoRepository;
+
+    @ConfigProperty(name = "scraper.repository.repos-to-persist")
+    Integer numberOfReposToPersist;
+
+    @ConfigProperty(name = "scraper.repository.start-id")
+    Long repositoryStartId;
+
     public void scrape() {
-
         Log.info("Scrape started");
-        List<RepositoryJson> repositoryList = repositoryRestClient.getRepositories();
-        Log.info(repositoryList);
 
-        List<Repository> entityRepositoryList = repositoryList.stream().map(RepositoryJson::toEntity).collect(Collectors.toList());
-        Log.info(entityRepositoryList);
+        var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
 
-        repositoryRepository.persist(entityRepositoryList);
+        var entityRepositoryList = repositoryList.stream().map(RepositoryJson::toEntity).collect(Collectors.toList());
 
-        Log.info(entityRepositoryList);
+        var chunks = Lists.partition(entityRepositoryList, numberOfReposToPersist);
 
+        for (List<Repository> chunk : chunks) {
+            persistChunk(chunk);
+        }
+
+        Log.info("Scrape finished");
     }
+
+    @Transactional
+    void persistChunk(List<Repository> repositoryList) {
+        repositoryRepository.persist(repositoryList);
+        var lastRepo = repositoryList.get(repositoryList.size() - 1);
+        var scraperInfo = scraperInfoRepository.findById(1l);
+        scraperInfo.setLastRepoId(lastRepo.getRepositoryIdId());
+        scraperInfoRepository.persist(scraperInfo);
+    }
+
+    private Long getRepositoryStartId() {
+        var scraperInfo = scraperInfoRepository.findById(1l);
+        if (scraperInfo.getLastRepoId() > 0) {
+            return scraperInfo.getLastRepoId();
+        }
+        return repositoryStartId;
+    }
+
 }

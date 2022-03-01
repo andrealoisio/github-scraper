@@ -4,6 +4,7 @@ import com.andrealoisio.jsonobjects.RepositoryJson;
 import com.andrealoisio.services.RestClientHeaderFactory;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import javax.ws.rs.GET;
@@ -18,7 +19,7 @@ public interface RepositoryRestClient {
 
     // https://api.github.com/repositories?since=461309262
     @GET
-    List<RepositoryJson> getRepositories(@QueryParam() Integer since);
+    List<RepositoryJson> getRepositoriesSince(@QueryParam() Long since);
 
     @GET
     List<RepositoryJson> getRepositories();
