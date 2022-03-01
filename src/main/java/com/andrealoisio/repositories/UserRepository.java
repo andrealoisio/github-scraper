@@ -13,4 +13,8 @@ public class UserRepository implements PanacheRepository<User> {
         return list("userId in ?1", userIds);
     }
 
+    public List<User> findByUsername(String username) {
+        return list("login", username);
+    }
+
 }

@@ -10,13 +10,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Path("/users")
-@RegisterRestClient(configKey = "users-api")
+@RegisterRestClient(configKey = "github-api")
 @RegisterClientHeaders(RestClientHeaderFactory.class)
 public interface UserRestClient {
-
-    @GET
-    @Path("/andrealoisio")
-    UserJson getUser();
 
     @GET
     @Path("/{username}")

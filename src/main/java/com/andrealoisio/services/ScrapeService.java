@@ -10,6 +10,7 @@ import com.andrealoisio.services.restclients.RepositoryRestClient;
 import com.google.common.collect.Lists;
 import io.quarkus.logging.Log;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -39,27 +40,35 @@ public class ScrapeService {
     @ConfigProperty(name = "scraper.repository.start-id")
     Long repositoryStartId;
 
+    @Inject
+    ManagedExecutor managedExecutor;
+
     public void scrape() {
-        Log.info("Scrape started");
+        managedExecutor.submit(() -> {
+            Log.info("Scrape started");
 
-        var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
+            var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
 
-        var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
+            var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
-        for (List<RepositoryJson> chunk : chunks) {
-            persistChunk(chunk);
-        }
+            for (List<RepositoryJson> chunk : chunks) {
+                persistChunk(chunk);
+            }
 
-        Log.info("Scrape finished");
+            Log.info("Scrape finished");
+        });
     }
 
     @Transactional
     void persistChunk(List<RepositoryJson> repositoryList) {
 
         var users = getUsersEntities(repositoryList);
-        userRepository.persist(getNonExistingUsers(users));
+        var nonExistingUsers = getNonExistingUsers(users);
+        Log.info("Persisting " + nonExistingUsers.size() + " users");
+        userRepository.persist(nonExistingUsers);
 
         var repositories = getRepositoriesEntities(repositoryList);
+        Log.info("Persisting " + repositories.size() + " repositories");
         repositoryRepository.persist(repositories);
 
         var lastRepo = repositories.get(repositories.size() - 1);

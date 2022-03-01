@@ -19,4 +19,5 @@ public class RestClientHeaderFactory implements ClientHeadersFactory {
         result.add("Authorization", "token " + githubToken);
         return result;
     }
+
 }

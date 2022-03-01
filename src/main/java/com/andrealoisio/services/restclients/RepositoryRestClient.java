@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 import java.util.List;
 
 @Path("/repositories")
-@RegisterRestClient(configKey = "repositories-api")
+@RegisterRestClient(configKey = "github-api")
 @RegisterClientHeaders(RestClientHeaderFactory.class)
 public interface RepositoryRestClient {
 

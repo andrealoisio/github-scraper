@@ -17,12 +17,6 @@ class UserRestClientTest {
     UserRestClient userRestClient;
 
     @Test
-    void testGetUser() {
-        UserJson user = userRestClient.getUser();
-        assert true;
-    }
-
-    @Test
     void testGetUserByUsername() {
         UserJson user = userRestClient.getUserByUsername("andrealoisio");
         System.out.println(user);

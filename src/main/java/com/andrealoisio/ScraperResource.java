@@ -1,6 +1,7 @@
 package com.andrealoisio;
 
 import com.andrealoisio.services.ScrapeService;
+import org.eclipse.microprofile.context.ManagedExecutor;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -18,6 +19,6 @@ public class ScraperResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String startScrape() {
         scrapeService.scrape();
-        return "OK";
+        return "Scrape process started";
     }
 }
