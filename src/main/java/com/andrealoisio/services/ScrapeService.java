@@ -40,23 +40,20 @@ public class ScrapeService {
     @ConfigProperty(name = "scraper.repository.start-id")
     Long repositoryStartId;
 
-    @Inject
-    ManagedExecutor managedExecutor;
+
 
     public void scrape() {
-        managedExecutor.submit(() -> {
-            Log.info("Scrape started");
+        Log.info("Scrape started");
 
-            var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
+        var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
 
-            var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
+        var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
-            for (List<RepositoryJson> chunk : chunks) {
-                persistChunk(chunk);
-            }
+        for (List<RepositoryJson> chunk : chunks) {
+            persistChunk(chunk);
+        }
 
-            Log.info("Scrape finished");
-        });
+        Log.info("Scrape finished");
     }
 
     @Transactional

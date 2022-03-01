@@ -15,10 +15,15 @@ public class ScraperResource {
     @Inject
     ScrapeService scrapeService;
 
+    @Inject
+    ManagedExecutor managedExecutor;
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String startScrape() {
-        scrapeService.scrape();
+        managedExecutor.submit(() -> {
+            scrapeService.scrape();
+        });
         return "Scrape process started";
     }
 }
