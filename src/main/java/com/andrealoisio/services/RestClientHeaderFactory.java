@@ -10,13 +10,17 @@ import javax.ws.rs.core.MultivaluedMap;
 @ApplicationScoped
 public class RestClientHeaderFactory implements ClientHeadersFactory {
 
-    @ConfigProperty(name = "github.token")
+    final static String UNAUTHENTICATED = "unauthenticated";
+
+    @ConfigProperty(name = "github.api-token")
     String githubToken;
 
     @Override
     public MultivaluedMap<String, String> update(MultivaluedMap<String, String> multivaluedMap, MultivaluedMap<String, String> multivaluedMap1) {
         MultivaluedMap<String, String> result = new MultivaluedHashMap<>();
-        result.add("Authorization", "token " + githubToken);
+        if (!githubToken.equals(UNAUTHENTICATED)) {
+            result.add("Authorization", "token " + githubToken);
+        }
         return result;
     }
 
