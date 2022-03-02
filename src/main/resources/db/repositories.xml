@@ -33,4 +33,10 @@
         <createSequence sequenceName="sq_repository" />
     </changeSet>
 
+    <changeSet id="4" author="mendes">
+        <addForeignKeyConstraint baseTableName="repositories" baseColumnNames="user_id" constraintName="fk_user"
+                                 referencedTableName="users"
+                                 referencedColumnNames="user_id" />
+    </changeSet>
+
 </databaseChangeLog>

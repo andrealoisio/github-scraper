@@ -9,8 +9,8 @@
 
 
     <include file="db/scraperInfo.xml" />
-    <include file="db/repositories.xml" />
     <include file="db/users.xml" />
+    <include file="db/repositories.xml" />
 
     <changeSet id="1" author="mendes" context="test">
         <sqlFile path="db/sql/import-test.sql" />

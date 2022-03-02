@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class ScrapeService {
@@ -40,17 +41,19 @@ public class ScrapeService {
     Long repositoryStartId;
 
 
-
     public void scrape() {
         Log.info("Scrape started");
 
-        var repositoryList = getRepositoriesFromApi();
+        IntStream.rangeClosed(1, 5)
+                .forEach((step) -> {
+                    var repositoryList = getRepositoriesFromApi();
 
-        var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
+                    var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
-        for (List<RepositoryJson> chunk : chunks) {
-            persistChunk(chunk);
-        }
+                    for (List<RepositoryJson> chunk : chunks) {
+                        persistChunk(chunk);
+                    }
+                });
 
         Log.info("Scrape finished");
     }
@@ -75,7 +78,7 @@ public class ScrapeService {
         var scraperInfo = scraperInfoRepository.findById(1l);
 
         scraperInfo.setLastRepoId(lastRepo.getRepositoryIdId());
-        scraperInfoRepository.persist(scraperInfo);
+        scraperInfoRepository.persistAndFlush(scraperInfo);
     }
 
     private List<Repository> getRepositoriesEntities(List<RepositoryJson> jsonRepositories) {
@@ -98,7 +101,8 @@ public class ScrapeService {
         return users.stream().filter(user -> !existingUserIds.contains(user.getUserId())).collect(Collectors.toList());
     }
 
-    private Long getRepositoryStartId() {
+    @Transactional
+    public Long getRepositoryStartId() {
         var scraperInfo = scraperInfoRepository.findById(1l);
         if (scraperInfo.getLastRepoId() > 0) {
             return scraperInfo.getLastRepoId();

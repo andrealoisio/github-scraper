@@ -32,7 +32,7 @@ public class UserResource {
     @GET
     @Path("/{username}/repositories")
     public Response getUserRepositories(@PathParam String username) {
-        var user = userService.getUserByUsername(username);
+        var user = userService.getUserRepositories(username);
         return Response.ok(user).build();
     }
 
