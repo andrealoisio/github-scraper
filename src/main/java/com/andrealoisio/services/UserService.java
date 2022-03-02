@@ -19,7 +19,7 @@ public class UserService {
     UserRepository userRepository;
 
     @Inject
-    RepositoryRepository repositoryRepository;
+    RepositoryService repositoryService;
 
     static final int MAX_PAGE_SIZE = 25;
 
@@ -33,7 +33,11 @@ public class UserService {
 
     public List<Repository> getUserRepositories(String username) {
         var user = userRepository.findByUsername(username);
-        return repositoryRepository.findByUserId(user.getUserId());
+        return repositoryService.getRepositoriesByUser(user.getLogin());
+    }
+
+    public List<User> findUsersByIds(List<Long> ids) {
+        return userRepository.findUsersByIds(ids);
     }
 
 }

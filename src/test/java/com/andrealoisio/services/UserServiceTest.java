@@ -3,6 +3,7 @@ package com.andrealoisio.services;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.h2.H2DatabaseTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -17,11 +18,7 @@ class UserServiceTest {
     @Test
     void getAllUsers() {
         var users = userService.getAllUsers();
-        System.out.println("Printing users");
-        System.out.println(users);
+        Assertions.assertTrue(users.size() == 25);
     }
 
-    @Test
-    void getUserByUsername() {
-    }
 }

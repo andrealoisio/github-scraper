@@ -9,7 +9,7 @@ import java.util.List;
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
 
-    public List<User> findByUserId(List<Long> userIds) {
+    public List<User> findUsersByIds(List<Long> userIds) {
         return list("userId in ?1", userIds);
     }
 

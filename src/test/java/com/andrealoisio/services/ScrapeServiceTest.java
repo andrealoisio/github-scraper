@@ -1,25 +1,46 @@
 package com.andrealoisio.services;
 
 import com.andrealoisio.repositories.UserRepository;
+import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @QuarkusTest
 class ScrapeServiceTest {
 
     @Inject
-    UserRepository userRepository;
+    UserService userService;
+
+    @Inject
+    RepositoryService repositoryService;
+
+    @Inject
+    ScrapeService scrapeService;
+
+    @Test
+    @TestTransaction
+    void testScrapeService() {
+        scrapeService.scrape();
+
+        var user1 = userService.getUserByUsername("johndoe0000000001");
+        Assertions.assertNotNull(user1);
+
+        var user2 = userService.getUserByUsername("johndoe0000000002");
+        Assertions.assertNotNull(user2);
+
+        var repos = userService.getUserRepositories("johndoe0000000001");
+        Assertions.assertTrue(repos.size() > 0);
+    }
 
     @Test
     void testInClause() {
-        var users = userRepository.findByUserId(List.of(93694596l, 100047450l));
-        System.out.println(users);
+        var users = userService.findUsersByIds(List.of(93694596l, 100047450l));
+        Assertions.assertTrue(users.size() > 0);
     }
 
 }

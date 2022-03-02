@@ -16,10 +16,6 @@ import javax.ws.rs.Path;
 public interface UserRestClient {
 
     @GET
-    @Path("/andrealoisio")
-    UserJson getUser();
-
-    @GET
     @Path("/{username}")
     UserJson getUserByUsername(@PathParam String username);
 

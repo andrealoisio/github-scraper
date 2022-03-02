@@ -30,13 +30,18 @@
     </changeSet>
 
     <changeSet id="3" author="mendes">
-        <createSequence sequenceName="sq_repository" />
-    </changeSet>
-
-    <changeSet id="4" author="mendes">
         <addForeignKeyConstraint baseTableName="repositories" baseColumnNames="user_id" constraintName="fk_user"
                                  referencedTableName="users"
                                  referencedColumnNames="user_id" />
+    </changeSet>
+
+    <changeSet id="4" author="mendes">
+        <createSequence sequenceName="sq_repository" />
+    </changeSet>
+
+    <changeSet id="5" author="mendes" context="test">
+        <dropSequence sequenceName="sq_repository" />
+        <createSequence sequenceName="sq_repository" startValue="1001" />
     </changeSet>
 
 </databaseChangeLog>

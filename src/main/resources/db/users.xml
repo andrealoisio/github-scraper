@@ -46,4 +46,9 @@
         <createSequence sequenceName="sq_user" />
     </changeSet>
 
+    <changeSet id="4" author="mendes" context="test">
+        <dropSequence sequenceName="sq_user" />
+        <createSequence sequenceName="sq_user" startValue="1001"/>
+    </changeSet>
+
 </databaseChangeLog>

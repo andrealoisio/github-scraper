@@ -14,13 +14,9 @@ public class ScraperInfo {
     @Column(name = "last_repo_id")
     private Long lastRepoId;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public Long getLastRepoId() {
         return lastRepoId;

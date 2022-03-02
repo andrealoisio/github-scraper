@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class ScrapeService {
@@ -44,16 +43,13 @@ public class ScrapeService {
     public void scrape() {
         Log.info("Scrape started");
 
-        IntStream.rangeClosed(1, 5)
-                .forEach((step) -> {
-                    var repositoryList = getRepositoriesFromApi();
+        var repositoryList = getRepositoriesFromApi();
 
-                    var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
+        var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
-                    for (List<RepositoryJson> chunk : chunks) {
-                        persistChunk(chunk);
-                    }
-                });
+        for (List<RepositoryJson> chunk : chunks) {
+            persistChunk(chunk);
+        }
 
         Log.info("Scrape finished");
     }
@@ -94,7 +90,7 @@ public class ScrapeService {
     }
 
     private List<User> getNonExistingUsers(List<User> users) {
-        var existingUserIds = userRepository.findByUserId(getUsersIds(users))
+        var existingUserIds = userRepository.findUsersByIds(getUsersIds(users))
                 .stream()
                 .map(User::getUserId)
                 .collect(Collectors.toList());
