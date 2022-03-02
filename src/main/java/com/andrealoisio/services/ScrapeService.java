@@ -1,16 +1,15 @@
 package com.andrealoisio.services;
 
-import com.andrealoisio.entity.Repository;
-import com.andrealoisio.entity.User;
-import com.andrealoisio.jsonobjects.RepositoryJson;
+import com.andrealoisio.entities.Repository;
+import com.andrealoisio.entities.User;
+import com.andrealoisio.rest.jsonobjects.RepositoryJson;
 import com.andrealoisio.repositories.RepositoryRepository;
 import com.andrealoisio.repositories.ScraperInfoRepository;
 import com.andrealoisio.repositories.UserRepository;
-import com.andrealoisio.services.restclients.RepositoryRestClient;
+import com.andrealoisio.rest.client.RepositoryRestClient;
 import com.google.common.collect.Lists;
 import io.quarkus.logging.Log;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;

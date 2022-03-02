@@ -1,15 +1,12 @@
 package com.andrealoisio.services.restclients;
 
-import com.andrealoisio.jsonobjects.UserJson;
+import com.andrealoisio.rest.client.UserRestClient;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 class UserRestClientTest {

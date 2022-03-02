@@ -1,8 +1,7 @@
 package com.andrealoisio.mocks;
 
-import com.andrealoisio.jsonobjects.RepositoryJson;
+import com.andrealoisio.rest.jsonobjects.RepositoryJson;
 import com.andrealoisio.services.ScrapeService;
-import io.quarkus.logging.Log;
 import io.quarkus.test.Mock;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;

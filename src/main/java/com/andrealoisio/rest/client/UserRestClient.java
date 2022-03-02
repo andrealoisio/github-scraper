@@ -1,7 +1,6 @@
-package com.andrealoisio.services.restclients;
+package com.andrealoisio.rest.client;
 
-import com.andrealoisio.jsonobjects.UserJson;
-import com.andrealoisio.services.RestClientHeaderFactory;
+import com.andrealoisio.rest.jsonobjects.UserJson;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;

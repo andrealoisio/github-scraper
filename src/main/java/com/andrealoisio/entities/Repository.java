@@ -1,5 +1,5 @@
 
-package com.andrealoisio.entity;
+package com.andrealoisio.entities;
 
 import javax.persistence.*;
 

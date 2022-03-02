@@ -1,7 +1,7 @@
 
-package com.andrealoisio.jsonobjects;
+package com.andrealoisio.rest.jsonobjects;
 
-import com.andrealoisio.entity.User;
+import com.andrealoisio.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserJson {

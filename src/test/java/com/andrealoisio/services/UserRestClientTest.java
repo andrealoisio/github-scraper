@@ -1,7 +1,7 @@
 package com.andrealoisio.services;
 
-import com.andrealoisio.jsonobjects.UserJson;
-import com.andrealoisio.services.restclients.UserRestClient;
+import com.andrealoisio.rest.jsonobjects.UserJson;
+import com.andrealoisio.rest.client.UserRestClient;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Assertions;

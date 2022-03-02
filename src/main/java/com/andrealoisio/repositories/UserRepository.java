@@ -1,6 +1,6 @@
 package com.andrealoisio.repositories;
 
-import com.andrealoisio.entity.User;
+import com.andrealoisio.entities.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,8 +13,8 @@ public class UserRepository implements PanacheRepository<User> {
         return list("userId in ?1", userIds);
     }
 
-    public List<User> findByUsername(String username) {
-        return list("login", username);
+    public User findByUsername(String username) {
+        return find("login", username).firstResult();
     }
 
 }

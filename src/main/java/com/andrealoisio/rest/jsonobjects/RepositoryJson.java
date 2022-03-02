@@ -1,9 +1,7 @@
 
-package com.andrealoisio.jsonobjects;
+package com.andrealoisio.rest.jsonobjects;
 
-import javax.annotation.Generated;
-
-import com.andrealoisio.entity.Repository;
+import com.andrealoisio.entities.Repository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RepositoryJson {

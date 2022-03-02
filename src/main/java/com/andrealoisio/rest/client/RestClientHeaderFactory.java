@@ -1,4 +1,4 @@
-package com.andrealoisio.services;
+package com.andrealoisio.rest.client;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.ext.ClientHeadersFactory;
