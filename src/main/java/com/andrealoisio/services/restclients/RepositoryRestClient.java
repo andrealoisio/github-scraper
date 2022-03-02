@@ -22,7 +22,4 @@ public interface RepositoryRestClient {
     @GET
     List<RepositoryJson> getRepositoriesSince(@QueryParam() Long since);
 
-    @GET
-    List<RepositoryJson> getRepositories();
-
 }

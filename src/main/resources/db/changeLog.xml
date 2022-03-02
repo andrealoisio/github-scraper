@@ -12,4 +12,8 @@
     <include file="db/repositories.xml" />
     <include file="db/users.xml" />
 
+    <changeSet id="1" author="mendes" context="test">
+        <sqlFile path="db/sql/import-test.sql" />
+    </changeSet>
+
 </databaseChangeLog>
