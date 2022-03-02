@@ -4,6 +4,41 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Packaging and running the application
+You will need Docker in order to run this application
+
+The first step is to compile and generate a deployable .jar file, after that you can build and start
+the application containers.
+
+### Generating the .jar file
+If you have a Java JDK installed you can just run the following command:
+```shell script
+./mvnw package -Dmaven.test.skip=true
+```
+If you don't, you can use a Docker image to generate the .jar file
+```shell script
+docker run -it --rm -v "$HOME/.m2":/root/.m2 -v "$(pwd)":/usr/src/myapp -w /usr/src/myapp openjdk:11 ./mvnw package -Dmaven.test.skip=true
+```
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+> **_NOTE:_**  After using the command above, you may want to delete the .m2 folder from your computer to save some disk space.
+
+### Running the application inside docker containers
+After generating the .jar file, run the following command
+```shell script
+docker-compose up -d
+```
+This command will start two containers, one for the application and one containing a Postgres database
+
+All the endpoints will be available on http://localhost:8080/q/swagger-ui/
+
+The http://localhost:8080/scrape endpoint is responsible for starting the scraping process, every time you call this endpoint the application will retrieve 100 repositories from Github API and store them on the database as well as the users that own that repositories.
+
+
+### Stop the applications and removing the volumes used to store data
+```shell script
+docker-compose down --volumes
+```
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
@@ -13,45 +48,3 @@ docker-compose up -d postgres
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
-
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/github-scraper-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Provided Code
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
