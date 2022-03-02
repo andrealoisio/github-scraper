@@ -45,7 +45,7 @@ public class ScrapeService {
     public void scrape() {
         Log.info("Scrape started");
 
-        var repositoryList = repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
+        var repositoryList = getRepositoriesFromApi();
 
         var chunks = Lists.partition(repositoryList, numberOfReposToPersist);
 
@@ -54,6 +54,10 @@ public class ScrapeService {
         }
 
         Log.info("Scrape finished");
+    }
+
+    public List<RepositoryJson> getRepositoriesFromApi() {
+        return repositoryRestClient.getRepositoriesSince(getRepositoryStartId());
     }
 
     @Transactional
