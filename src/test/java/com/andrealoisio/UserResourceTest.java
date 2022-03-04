@@ -20,7 +20,6 @@ class UserResourceTest {
                 .body("size()", equalTo(25))
                 .body("id", hasItems(24, 25))
                 .body("userId", hasItems(82463519, 7031616))
-                .statusCode(200)
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -32,8 +31,15 @@ class UserResourceTest {
                 .body("userId", equalTo(73558557))
                 .body("login", equalTo("awelawi"))
                 .body("nodeId", equalTo("MDQ6VXNlcjczNTU4NTU3"))
-                .statusCode(200)
                 .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    void getNonExistingUserByUsername() {
+        given()
+                .when().get("/users/aaaaaaaaaaaaaaaaaaaaa")
+                .then()
+                .statusCode(Response.Status.NOT_FOUND.getStatusCode());
     }
 
     @Test
@@ -45,7 +51,15 @@ class UserResourceTest {
                 .body("userId", hasItems(73558557))
                 .body("fullName", hasItems("awelawi/NYT-MOVIE-APP"))
                 .body("nodeId", hasItems("R_kgDOG38FYg"))
-                .statusCode(200)
                 .statusCode(Response.Status.OK.getStatusCode());
     }
+
+    @Test
+    void getNonExistingUserRepositories() {
+        given()
+                .when().get("/users/aaaaaaaaaaaaaaaaaaaaa/repositories")
+                .then()
+                .statusCode(Response.Status.NOT_FOUND.getStatusCode());
+    }
+
 }

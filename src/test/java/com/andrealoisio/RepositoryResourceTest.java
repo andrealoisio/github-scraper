@@ -35,4 +35,13 @@ class RepositoryResourceTest {
                 .statusCode(200)
                 .statusCode(Response.Status.OK.getStatusCode());
     }
+
+    @Test
+    void searchNonExistentUserRepositories() {
+        given()
+                .when().get("/repositories/user/aaaaaaaaaaaaaaaaaaaaa")
+                .then()
+                .statusCode(Response.Status.NOT_FOUND.getStatusCode());
+    }
+
 }

@@ -17,9 +17,6 @@ class ScrapeServiceTest {
     UserService userService;
 
     @Inject
-    RepositoryService repositoryService;
-
-    @Inject
     ScrapeService scrapeService;
 
     @Test
@@ -34,7 +31,8 @@ class ScrapeServiceTest {
         Assertions.assertNotNull(user2);
 
         var repos = userService.getUserRepositories("johndoe0000000001");
-        Assertions.assertTrue(repos.size() > 0);
+        Assertions.assertTrue(((List)repos.getEntity()).size() > 0);
+
     }
 
     @Test
