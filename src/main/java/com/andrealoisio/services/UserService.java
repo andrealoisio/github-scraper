@@ -10,6 +10,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
@@ -27,13 +28,20 @@ public class UserService {
         return userRepository.findAll().page(Page.ofSize(MAX_PAGE_SIZE)).list();
     }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Response getUserByUsername(String username) {
+        return userRepository
+                .find("login", username)
+                .singleResultOptional()
+                .map(user -> Response.ok(user).build())
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
-    public List<Repository> getUserRepositories(String username) {
-        var user = userRepository.findByUsername(username);
-        return repositoryService.getRepositoriesByUser(user.getLogin());
+    public Response getUserRepositories(String username) {
+        return userRepository
+                .find("login", username)
+                .singleResultOptional()
+                .map(user -> Response.ok(repositoryService.getRepositoriesByUser(user.getLogin())).build())
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
     public List<User> findUsersByIds(List<Long> ids) {

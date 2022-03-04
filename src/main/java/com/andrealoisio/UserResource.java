@@ -25,15 +25,13 @@ public class UserResource {
     @GET
     @Path("/{username}")
     public Response getUserByUsername(@PathParam String username) {
-        var user = userService.getUserByUsername(username);
-        return Response.ok(user).build();
+        return userService.getUserByUsername(username);
     }
 
     @GET
     @Path("/{username}/repositories")
     public Response getUserRepositories(@PathParam String username) {
-        var user = userService.getUserRepositories(username);
-        return Response.ok(user).build();
+        return userService.getUserRepositories(username);
     }
 
 }
