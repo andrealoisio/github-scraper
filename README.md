@@ -31,7 +31,11 @@ This command will start two containers, one for the application and one containi
 
 All the endpoints will be available on http://localhost:8080/q/swagger-ui/
 
-The http://localhost:8080/scrape endpoint is responsible for starting the scraping process, every time you call this endpoint the application will retrieve 100 repositories from Github API and store them on the database as well as the users that own that repositories.
+The http://localhost:8080/scrape endpoint is responsible for starting the
+scraping process, every time you call this endpoint the application will
+retrieve 100 repositories from Github API and store them in the database
+as well as the users that own that repositories. So if you want to schedule a regular 
+job for scraping you can use a cronjob with curl.
 
 
 ### Stop the applications and removing the volumes used to store data
@@ -48,3 +52,11 @@ docker-compose up -d postgres
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+## Todo
+ - Pagination
+ - Add an endpoint with the summary of the stored data
+ - Include a full text field with details about the repositories/users
+ - HTTP error for rate limiting
+ - Some dates field are being stored as string
+ - Change how the rest clients are tested (use wiremock?)
