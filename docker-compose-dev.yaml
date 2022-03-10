@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=github_scraper
+      - POSTGRES_DB=github_scraper
+      - POSTGRES_PASSWORD=abc123!@#
+    ports:
+      - 5432:5432
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+  java:
+    image: openjdk:11
+    command: ./mvnw compile quarkus:dev
+    environment:
+      - POSTGRES_HOST=postgres
+    ports:
+      - 8080:8080
+      - 5005:5005
+    volumes:
+      - $HOME/.m2:/root/.m2
+      - $PWD:/usr/src/myapp
+    working_dir: /usr/src/myapp
+
+volumes:
+  postgres_data:
+    driver: local
