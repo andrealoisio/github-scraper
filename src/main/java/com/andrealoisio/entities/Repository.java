@@ -1,10 +1,14 @@
 
 package com.andrealoisio.entities;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "repositories")
+@Indexed
 public class Repository {
 
     @Id
@@ -13,6 +17,7 @@ public class Repository {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @FullTextField(analyzer = "description")
     private String description;
     
     private Boolean fork;

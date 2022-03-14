@@ -14,6 +14,7 @@ services:
     command: ./mvnw compile quarkus:dev
     environment:
       - POSTGRES_HOST=postgres
+      - ELASTIC_SEARCH_HOST=elastic
     ports:
       - 8080:8080
       - 5005:5005
@@ -21,6 +22,13 @@ services:
       - $HOME/.m2:/root/.m2
       - $PWD:/usr/src/myapp
     working_dir: /usr/src/myapp
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.1-amd64
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - "discovery.type=single-node"
 
 volumes:
   postgres_data:

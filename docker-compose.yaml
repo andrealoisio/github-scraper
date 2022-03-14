@@ -11,6 +11,7 @@ services:
       - "postgres_data:/var/lib/postgresql/data"
   rest:
     image: quarkus/quarkus-kotlin-rest-api-jvm
+    restart: on-failure
     build:
       context: .
       dockerfile: ./src/main/docker/Dockerfile.jvm
@@ -18,6 +19,16 @@ services:
       - 8080:8080
     volumes:
       - ./target/quarkus-app:/deployments
+    depends_on:
+      - elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.1-amd64
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - http.host=0.0.0.0
 
 volumes:
   postgres_data:
