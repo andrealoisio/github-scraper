@@ -22,13 +22,14 @@ services:
       - $HOME/.m2:/root/.m2
       - $PWD:/usr/src/myapp
     working_dir: /usr/src/myapp
-  elastic:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.1-amd64
     ports:
       - 9200:9200
       - 9300:9300
     environment:
-      - "discovery.type=single-node"
+      - discovery.type=single-node
+      - http.host=0.0.0.0
 
 volumes:
   postgres_data:
